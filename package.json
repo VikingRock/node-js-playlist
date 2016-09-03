@@ -9,15 +9,13 @@
     "url": "https://github.com/VikingRock/node-js-playlist"
   },
   "homepage": "https://github.com/VikingRock/node-js-playlist",
-  "dependencies": {
-    "express": "^4.14.0"
-  },
-  "scripts": {
-    "test": "gulp lint",
-    "start": "gulp start"
-  },
+  "dependencies": {},
+  "scripts": {},
   "engines": {
     "node": "^6.3.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "ejs": "^2.5.1",
+    "express": "^4.14.0"
+  }
 }

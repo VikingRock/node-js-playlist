@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Page</title>
+</head>
+<body>
+
+    <% include partials/nav.ejs %>
+
+    <h1>Profile</h1>
+    <p>This is a profile of <strong><%= person %></strong></p>
+    <table>
+        <thead>
+            <% Object.getOwnPropertyNames(stuff).forEach(function(el) { %>
+
+            <td><%= el %></td>
+
+            <% }); %>
+        </thead>
+
+        <tr>
+            <% for (var prop in stuff) { %>
+
+            <td><%= stuff[prop] %></td>
+
+            <% } %>
+        </tr>
+
+        <!--<tr>-->
+            <!--<td><%= stuff.name %></td>-->
+            <!--<td><%= stuff.vendor %></td>-->
+            <!--<td><%= stuff.cost %></td>-->
+        <!--</tr>-->
+    </table>
+
+</body>
+
+<style>
+    table {
+        border-collapse: collapse;
+        border: 2px solid grey;
+    }
+
+    th,td {
+        border: 2px solid grey;
+        padding: 5px;
+    }
+</style>
+
+</html>
