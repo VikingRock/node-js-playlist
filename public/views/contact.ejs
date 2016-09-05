@@ -2,10 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>Contact</title>
 </head>
 <body>
     <% include partials/nav.ejs %>
     <cite>Contact page</cite>
+
+    <form id="contact" method="POST" action="/contact">
+        <label for="">Whom do you want to contact</label>
+        <input type="text" name="person" value="<%= queryStr.name %>">
+        
+        <label for="">Which Department</label>
+        <input type="text" name="department" value="<%= queryStr.dept %>">
+        
+        <label for="">Your Email</label>
+        <input type="email" name="email" value="<%= queryStr.email %>">
+
+        <input type="submit" value="submit">
+    </form>
+
 </body>
 </html>
