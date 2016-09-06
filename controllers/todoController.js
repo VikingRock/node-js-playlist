@@ -1,6 +1,3 @@
-/**
- * Created by aliaksandrzinchuk on 9/5/16.
- */
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
@@ -12,37 +9,40 @@ var todoScema = new mongoose.Schema({
     item: String
 });
 
+//DB model
 var Todo = mongoose.model('Todo', todoScema);
-var testItem = Todo({item:'drink beer'}).save(function(err) {
-    if (err) throw err;
-    console.log('item saved');
-});
 
-var data = [
-    {item:'make Mary happy'},
-    {item:'learn Node.js'},
-    {item:'get well'}
-];
+
+//var data = [
+//    {item:'make Mary happy'},
+//    {item:'learn Node.js'},
+//    {item:'get well'}
+//];
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 module.exports = function(app) {
 
 app.get('/todo', function(req, res) {
-    res.render('todo', {data: data});
+    Todo.find({}, function(err, data) {
+        if (err) throw err;
+        res.render('todo', {data: data});
+    });
 });
 
 app.post('/todo', urlencodedParser, function(req, res) {
-    data.push(req.body);
-    res.json(data);
+    var newTodo = Todo(req.body).save(function(err, data) {
+        if (err) throw err;
+        res.json(data);
+    });
 });
 
 app.delete('/todo/:item', function(req, res) {
 
-    data = data.filter(function(todo) {
-        return todo.item.replace(/ /g, '-') !== req.params.item;
+    Todo.find({item: req.params.item.replace(/\-/g, ' ')}).remove(function(err, data) {
+        if (err) throw err;
+        res.json(data);
     });
-    res.json(data);
 });
 
 };
